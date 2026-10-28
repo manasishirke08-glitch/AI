@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CareerAI</title>
+<style>
+:root{--bg:#f4f6fb;--cd:#fff;--tx:#14203d;--mu:#5d6b8a;--bd:#dde3f0;--nv:#0f1b3d;--pu:#6d4aff;--gr:#17a56b;--bad:#c62828;--sf:#eceffd;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0b1226;--cd:#141d3a;--tx:#e9edf9;--mu:#9aa7c7;--bd:#26325a;--sf:#1b2650;--bad:#ff8a80;--gr:#4ade9a}}
+:root[data-theme=dark]{--bg:#0b1226;--cd:#141d3a;--tx:#e9edf9;--mu:#9aa7c7;--bd:#26325a;--sf:#1b2650;--bad:#ff8a80;--gr:#4ade9a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 "Segoe UI",system-ui,sans-serif}
+header{background:var(--nv);color:#fff;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.logo{font-weight:800;font-size:22px;margin-right:auto}.logo i{font-style:normal;color:#a99bff}
+#nav{display:flex;flex-wrap:wrap;gap:4px}#nav button,#ham{background:none;border:0;color:#fff;font:inherit;font-size:14px;padding:6px 10px;border-radius:8px;cursor:pointer}#nav button.on,#nav button:hover{background:#ffffff22}
+#ham{display:none;font-size:20px}@media(max-width:760px){#ham{display:block}#nav{display:none;width:100%;flex-direction:column}#nav.open{display:flex}}
+main{max-width:1050px;margin:auto;padding:16px}
+.hero{background:linear-gradient(135deg,#0f1b3d,#3b2a9c);color:#fff;border-radius:20px;padding:26px;display:grid;gap:20px;grid-template-columns:1.1fr 1fr;align-items:center}@media(max-width:760px){.hero{grid-template-columns:1fr}}
+h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin:.2em 0}h2{margin:.3em 0 .6em}h3{margin:.5em 0 .3em}
+.btn{background:var(--pu);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer;margin:4px 6px 4px 0;display:inline-block;text-decoration:none}.btn.g{background:var(--sf);color:var(--tx)}.hero .btn.g{background:#ffffff22;color:#fff}
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:14px;padding:16px}.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.mu{color:var(--mu);font-size:14px}.pct{float:right;color:var(--gr)}
+.bar{height:10px;background:var(--bd);border-radius:6px;overflow:hidden}.bar div{height:100%;background:linear-gradient(90deg,var(--pu),var(--gr))}
+label{display:block;font-size:14px;margin:8px 0 2px;color:var(--mu)}input,select,textarea{width:100%;padding:9px;border-radius:8px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font:inherit}input[type=radio],input[type=checkbox],input[type=range]{width:auto}
+.q label{display:flex;gap:8px;align-items:center;color:var(--tx);font-size:16px;padding:6px 10px;border:1px solid var(--bd);border-radius:8px;margin:5px 0;cursor:pointer}
+.fb{font-weight:600;min-height:1.4em}.ok{color:var(--gr)}.er{color:var(--bad)}
+.tag{display:inline-block;background:var(--sf);border-radius:14px;padding:2px 10px;font-size:13px;margin:2px}
+#modal{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;padding:12px;z-index:30}#modal[hidden]{display:none}#modal .card{max-width:600px;width:100%;max-height:90vh;overflow:auto}
+.fig{max-width:250px;margin:auto;position:relative}.fig svg{width:100%;height:auto}
+.bub{background:#fff;color:#14203d;border-radius:16px;padding:12px 14px;margin-top:8px;font-size:15px;min-height:70px}
+.eye{transform-box:fill-box;transform-origin:center;animation:bl 4s infinite}@keyframes bl{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+.mo{transform-box:fill-box;transform-origin:center}.talking .mo{animation:tk .22s infinite alternate}@keyframes tk{from{transform:scaleY(.5)}to{transform:scaleY(3)}}
+.arm{transform-origin:156px 205px;animation:wv 1s ease-in-out 3}@keyframes wv{0%,100%{transform:rotate(0)}50%{transform:rotate(-22deg)}}
+.fl{animation:fl 3s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-5px)}}
+@media(prefers-reduced-motion:reduce){.eye,.arm,.fl,.talking .mo{animation:none}}
+#fab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:20;border-radius:30px;padding:12px 18px}
+#chat{position:fixed;right:14px;bottom:calc(70px + env(safe-area-inset-bottom,0px));width:min(340px,calc(100vw - 28px));z-index:20}#chat[hidden]{display:none}
+#cm{max-height:240px;overflow:auto;font-size:14px}#cm p{margin:6px 0;padding:6px 10px;border-radius:10px;background:var(--sf)}#cm p.u{background:var(--pu);color:#fff;text-align:right}
+.card:hover{box-shadow:0 10px 26px #3b2a9c26;border-color:#a99bff}.hero{box-shadow:0 14px 40px #3b2a9c40}body{padding-bottom:90px}
+table{width:100%;border-collapse:collapse}td,th{border-bottom:1px solid var(--bd);padding:8px;text-align:left;vertical-align:top;font-size:14px}th{width:26%;color:var(--mu)}
+footer{text-align:center;color:var(--mu);font-size:13px;padding:24px}a{color:var(--pu)}:focus-visible{outline:3px solid #a99bff;outline-offset:2px}
+</style></head><body>
+<header><div class="logo">Career<i>AI</i></div><button id="ham" aria-label="Menu">☰</button><nav id="nav"></nav></header>
+<main>
+
+<section id="home">
+<div class="hero"><div><h1>Discover Your Future. Build Your Career with AI.</h1>
+<p>CareerAI is an AI-based career guidance and job recommendation system. Answer a short assessment and get scored career matches, a skill-gap analysis, a learning roadmap and jobs that fit you.</p>
+<button class="btn" data-go="assess">Start Career Assessment</button><button class="btn g" data-go="careers">Explore Careers</button><button class="btn g" data-go="jobs">Explore Jobs</button><br><button class="btn" id="demo" style="background:#f0b429;color:#241a00">🎓 Show Me How CareerAI Works</button></div>
+<div><div class="fig fl" id="fig"><svg viewBox="0 0 220 270" role="img" aria-label="AIRA, your animated career guide">
+<ellipse cx="110" cy="105" rx="60" ry="68" fill="#2a1a3a"/><path d="M50 270C50 205 80 180 110 180C140 180 170 205 170 270Z" fill="#5b3fd0"/><path d="M92 182L110 215L128 182Z" fill="#fff"/><rect x="99" y="150" width="22" height="34" rx="9" fill="#f2c6a0"/>
+<ellipse cx="110" cy="105" rx="44" ry="50" fill="#f2c6a0"/><path d="M64 100C62 48 158 48 156 100C142 76 90 74 64 100Z" fill="#2a1a3a"/>
+<ellipse class="eye" cx="92" cy="108" rx="5" ry="6.5" fill="#1b1230"/><ellipse class="eye" cx="128" cy="108" rx="5" ry="6.5" fill="#1b1230"/>
+<circle cx="92" cy="108" r="12" fill="none" stroke="#3a2f60" stroke-width="2"/><circle cx="128" cy="108" r="12" fill="none" stroke="#3a2f60" stroke-width="2"/><path d="M104 108H116" stroke="#3a2f60" stroke-width="2"/>
+<circle cx="80" cy="128" r="6" fill="#f4a5a5" opacity=".6"/><circle cx="140" cy="128" r="6" fill="#f4a5a5" opacity=".6"/><ellipse class="mo" cx="110" cy="135" rx="9" ry="2.6" fill="#b3475a"/>
+<g class="arm"><path d="M156 205L194 160" stroke="#5b3fd0" stroke-width="20" stroke-linecap="round"/><circle cx="196" cy="154" r="10" fill="#f2c6a0"/></g></svg></div>
+<div class="bub" id="bub" aria-live="polite">Hi! I am AIRA, your CareerAI guide.</div>
+<div><button class="btn" id="talk">🔊 Talk to AIRA</button><button class="btn g" id="skip">Skip intro</button><button class="btn g" id="mute">Sound: on</button></div></div></div>
+<h2>Let AIRA explain a feature</h2>
+<div class="grid" id="feat"></div>
+<h2>How CareerAI works</h2>
+<div class="grid"><div class="card"><h3>1. Answer</h3><p class="mu">Complete 10 simple questions about interests, strengths and goals.</p></div><div class="card"><h3>2. Match</h3><p class="mu">A weighted scoring engine compares you with 10 career profiles.</p></div><div class="card"><h3>3. Grow</h3><p class="mu">See skill gaps, a roadmap and jobs ranked for you.</p></div></div>
+</section>
+
+<section id="careers" hidden><h2>Explore careers</h2>
+<div class="grid"><div><label for="cq">Search careers or skills</label><input id="cq" placeholder="e.g. Python, design"></div><div><label for="cc">Category</label><select id="cc"><option value="">All</option></select></div></div>
+<div class="grid" id="cl" style="margin-top:12px"></div></section>
+
+<section id="jobs" hidden><h2>Explore jobs</h2>
+<p class="mu">These are <b>sample jobs created for this university demo</b>, not live vacancies. Login and finish the assessment to see match scores.</p>
+<div class="grid"><div><label>Location</label><select id="jl"><option value="">All</option></select></div><div><label>Category</label><select id="jc"><option value="">All</option></select></div><div><label>Experience</label><select id="je"><option value="">All</option><option>Fresher</option><option>1-2 years</option></select></div><div><label>Work type</label><select id="jm"><option value="">All</option><option>Remote</option><option>On-site</option></select></div></div>
+<div class="grid" id="jlist" style="margin-top:12px"></div></section>
+
+<section id="assess" hidden><h2>AI career assessment</h2><div class="card q" id="qs"></div></section>
+<section id="dash" hidden></section>
+<section id="skills" hidden><h2>Skill analysis</h2><div class="card"><label>Choose a career</label><select id="sc"></select><div id="sk"></div></div></section>
+
+<section id="auth" hidden><div class="grid">
+<div class="card"><h2>Login</h2><label for="le">Email</label><input id="le" type="email" autocomplete="email"><label for="lp">Password</label><input id="lp" type="password"><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="lshow">Show password</label>
+<button class="btn" id="lgo">Login</button><button class="btn g" id="lforgot">Forgot password</button><button class="btn g" id="lguest">Continue as guest</button><p class="fb" id="lm" aria-live="polite"></p></div>
+<div class="card"><h2>Create account</h2><label for="rn">Full name</label><input id="rn"><label for="re">Email</label><input id="re" type="email"><label for="rp">Password (6+ characters)</label><input id="rp" type="password"><label for="rc">Confirm password</label><input id="rc" type="password">
+<label for="rd">Education level</label><select id="rd"><option value="">Choose…</option><option>12th pass</option><option>Diploma</option><option>Graduate</option><option>Postgraduate</option></select><label for="rq">Course or qualification</label><input id="rq"><label for="ri">Career interests (optional)</label><input id="ri">
+<button class="btn" id="rgo">Create account</button><p class="fb" id="rm" aria-live="polite"></p></div></div></section>
+
+<section id="compare" hidden><h2>Career comparison</h2><div class="grid"><div><label for="ca">Career A</label><select id="ca"></select></div><div><label for="cb">Career B</label><select id="cb"></select></div></div><div class="card" id="ct" style="margin-top:12px;overflow:auto"></div></section>
+<section id="admin" hidden></section>
+<section id="about" hidden><h2>About CareerAI</h2><div class="grid">
+<div class="card"><h3>Problem</h3><p>Many students are unsure which career fits them or which skills to build.</p><h3>Objective</h3><p>Give personalised career, skill and job guidance in one place.</p></div>
+<div class="card"><h3>How the AI works</h3><p>This is a <b>rule-based recommendation engine</b>. Each answer adds weights to 8 traits (coding, maths, data, security, design, people, business, infrastructure). Your trait vector is compared with every career using cosine similarity, which gives the match %.</p></div>
+<div class="card"><h3>Job match score</h3><p>Skills 50% + career match 25% + education 15% + experience 10%.</p><h3>Technology</h3><p>HTML, CSS, JavaScript.</p></div>
+<div class="card"><h3>Limitations</h3><p>Results are guidance, not guarantees. Jobs are samples. Accounts are a demo stored only in this browser. A real system needs Firebase or a similar backend for secure shared accounts and an admin panel.</p><p class="mu">Real vacancies: <a href="https://www.ncs.gov.in" target="_blank" rel="noopener">National Career Service</a>, <a href="https://internshala.com" target="_blank" rel="noopener">Internshala</a>.</p></div>
+<div class="card"><h3>Help and FAQ</h3><details><summary>How do I create an account?</summary><p>Open Login / Register, fill the form on the right and click Create account, or continue as a guest.</p></details><details><summary>How do I get recommendations?</summary><p>Login, open AI Assessment, answer all 10 questions and submit. Your top careers appear on the dashboard.</p></details><details><summary>How do I save a career or job?</summary><p>Open it and click Save. Saved items show on your dashboard.</p></details><details><summary>Are the jobs real?</summary><p>No. They are samples for the demo. Use the National Career Service for real vacancies.</p></details></div>
+<div class="card"><h3>Contact and feedback</h3><label for="fn">Name</label><input id="fn"><label for="fm">Message (10+ characters)</label><textarea id="fm" rows="3"></textarea><button class="btn" id="fbs">Send feedback</button><p class="fb" id="fbm" aria-live="polite"></p></div></div></section>
+</main>
+<div id="modal" hidden><div class="card" role="dialog" aria-modal="true"><div id="mc"></div><button class="btn g" id="mx">Close</button></div></div>
+<div class="card" id="chat" hidden><b>👩‍🏫 Ask AIRA</b><div id="cm"></div><div style="display:flex;gap:6px;margin-top:8px"><input id="ci" placeholder="Which career is good for me?"><button class="btn" id="cs" style="margin:0">Send</button><button class="btn g" id="mic" hidden style="margin:0" aria-label="Speak your question">🎙️</button></div></div>
+<button class="btn" id="fab">💬 Ask AIRA</button>
+<footer>CareerAI · University project · Guidance only, not a guarantee of employment.</footer>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const MEM={};
+const sv=(k,v)=>{MEM[k]=v;try{localStorage.setItem("cai:"+k,JSON.stringify(v))}catch(e){}};
+const ld=(k,d)=>{try{const v=localStorage.getItem("cai:"+k);if(v!==null)return JSON.parse(v)}catch(e){}return k in MEM?MEM[k]:d};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const cur=()=>ld("cur",null),ud=(k,d)=>{const v=ld("d:"+cur()+":"+k,d);return(k=="res"||k=="sc")&&Array.isArray(v)?v.filter(x=>CAR.some(c=>c[0]==(x.id||x))):v},us=(k,v)=>sv("d:"+cur()+":"+k,v);
+const me=()=>{const c=cur();return !c?null:c=="guest"?{name:"Guest",email:"guest",edu:"Graduate"}:ld("acc:"+c,null)};
+const TR=["code","math","data","security","design","people","business","infra"],TN={code:"programming",math:"mathematics",data:"data",security:"security",design:"design",people:"people-focused work",business:"business",infra:"systems and infrastructure"};
+const CAR=[["ai","AI/ML Engineer","🤖","Technology","Builds models that learn from data to make predictions.",{code:3,math:3,data:3},["Python","Machine Learning","Statistics","Data Handling","Problem Solving"],"B.Tech/B.Sc in CS, Maths or similar","https://www.kaggle.com/learn"],
+["sw","Software Developer","💻","Technology","Designs, builds and tests software applications.",{code:3,math:1,infra:1},["Java","Data Structures","SQL","Git","Problem Solving"],"B.Tech/BCA/B.Sc CS","https://www.geeksforgeeks.org"],
+["da","Data Analyst","📊","Data","Turns raw data into reports and insights.",{data:3,math:2,business:1},["SQL","Excel","Data Visualization","Statistics","Communication"],"Any graduate with maths or stats","https://www.kaggle.com/learn"],
+["ds","Data Scientist","🧪","Data","Uses statistics and ML to solve complex data problems.",{data:3,math:3,code:2},["Python","Statistics","Machine Learning","SQL","Data Visualization"],"B.Tech/M.Sc in Maths, Stats or CS","https://www.kaggle.com/learn"],
+["web","Web Developer","🌐","Technology","Builds websites and web applications.",{code:3,design:1},["HTML/CSS","JavaScript","React","Git","Responsive Design"],"Diploma/BCA/B.Tech","https://developer.mozilla.org/en-US/docs/Learn"],
+["cy","Cybersecurity Analyst","🛡️","Security","Protects systems and data from attacks.",{security:3,infra:2,code:1},["Networking","Linux","Ethical Hacking","Cryptography Basics","Problem Solving"],"B.Tech/BCA with networking","https://tryhackme.com"],
+["cl","Cloud Engineer","☁️","Technology","Designs and runs applications on cloud platforms.",{infra:3,code:2,security:1},["Linux","Cloud Platforms","Networking","Scripting","DevOps Basics"],"B.Tech/BCA/Diploma","https://aws.amazon.com/training/"],
+["ux","UI/UX Designer","🎨","Design","Designs easy and attractive digital experiences.",{design:3,people:1},["Figma","User Research","Wireframing","Visual Design","Communication"],"Design or any graduate with portfolio","https://www.interaction-design.org"],
+["ba","Business Analyst","📈","Business","Connects business needs with technical solutions.",{business:3,data:1,people:2},["Excel","SQL","Communication","Requirement Analysis","Documentation"],"Any graduate, MBA helpful","https://swayam.gov.in"],
+["dba","Database Administrator","🗄️","Data","Keeps databases fast, safe and available.",{data:2,infra:2,code:1,security:1},["SQL","Database Design","Backup & Recovery","Linux","Performance Tuning"],"B.Tech/BCA/B.Sc CS","https://www.w3schools.com/sql/"]];
+const QS=[["Which activity do you enjoy most?",[["Programming",{code:3,math:1}],["Designing",{design:3}],["Business planning",{business:3,people:1}],["Helping people",{people:3}]]],
+["Which subject interests you most?",[["Mathematics",{math:3,data:1}],["Computer Science",{code:3}],["Economics / Business",{business:3,data:1}],["Art / Design",{design:3}]]],
+["Do you enjoy solving logical problems?",[["Love it",{code:2,math:2,security:1}],["Sometimes",{code:1,math:1}],["Rarely",{people:1,design:1}]]],
+["What do you prefer working with?",[["Data",{data:3,math:1}],["Software",{code:3}],["People",{people:3,business:1}],["Creative projects",{design:3}]]],
+["Which is your strongest skill today?",[["Python",{code:2,data:2}],["Java / C++",{code:3}],["SQL / Excel",{data:3}],["Networking",{security:2,infra:3}],["Figma / Photoshop",{design:3}],["Communication",{people:2,business:2}]]],
+["How comfortable are you with mathematics?",[["Very comfortable",{math:3,data:1}],["Okay",{math:1}],["Not very",{design:1,people:1}]]],
+["How do you like to work?",[["Independently",{code:1,security:1,data:1}],["In a team",{people:2,business:1}],["Both equally",{people:1,code:1}]]],
+["Which industry attracts you?",[["Technology",{code:1,infra:1}],["Finance",{business:2,data:1}],["Healthcare / Education",{people:2}],["Media / Creative",{design:2}],["Government / Defence",{security:3}]]],
+["Which work would you enjoy doing?",[["Build apps",{code:3}],["Analyse and predict",{data:3,math:2}],["Protect systems",{security:3}],["Manage cloud servers",{infra:3}],["Plan projects",{business:3}],["Design experiences",{design:3}]]],
+["What is your long-term goal?",[["Create AI products",{code:2,math:2,data:2}],["Lead a team",{business:2,people:2}],["Become a technical specialist",{security:1,infra:1,code:1}],["Start my own business",{business:3,design:1}]]]];
+const JB=[["Junior ML Engineer","Demo AI Labs","Pune","ai","Fresher","On-site"],["Graduate Software Developer","Sample Soft Pvt Ltd","Mumbai","sw","Fresher","On-site"],["Java Developer Trainee","Demo Systems","Nagpur","sw","Fresher","Remote"],["Data Analyst Intern","Sample Analytics","Bengaluru","da","Fresher","Remote"],["Junior Data Scientist","Demo Insights","Hyderabad","ds","1-2 years","On-site"],["Frontend Web Developer","Sample Web Studio","Pune","web","Fresher","Remote"],["SOC Analyst Trainee","Demo SecureNet","Mumbai","cy","Fresher","On-site"],["Cloud Support Associate","Sample Cloud Co","Bengaluru","cl","Fresher","On-site"],["UI/UX Design Intern","Demo Design House","Pune","ux","Fresher","Remote"],["Business Analyst Trainee","Sample Consulting","Mumbai","ba","Fresher","On-site"],["Junior Database Administrator","Demo DataCore","Nashik","dba","1-2 years","On-site"],["Python Developer","Sample Tech Works","Nagpur","ai","1-2 years","Remote"]];
+const cx=id=>CAR.find(c=>c[0]==id),rmap=c=>c[6].map(s=>"Learn and practise "+s).concat(["Build a small project","Create a portfolio and prepare for interviews"]);
+
+const NC=CAR.length,NB=JB.length;ld("xc",[]).forEach(c=>CAR.push(c));ld("xj",[]).forEach(j=>JB.push(j));
+/* navigation */
+function drawNav(){const u=cur();const L=[["home","Home"],["careers","Careers"],["jobs","Explore Jobs"],["assess","AI Assessment"],["compare","Compare"],["admin","Admin Demo"],["about","About"]].concat(u?[["dash","Dashboard"],["skills","Skills"]]:[["auth","Login / Register"]]);
+$("#nav").innerHTML=L.map(l=>`<button data-go="${l[0]}">${l[1]}</button>`).join("")+(u?`<button id="lo">Logout (${esc(me()?me().name:"")})</button>`:"")}
+function go(id){if((id=="assess"||id=="dash"||id=="skills")&&!cur()){id="auth";say("Please login or create an account first, or continue as a guest.")}
+$$("main section").forEach(s=>s.hidden=s.id!==id);$$("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.go===id));$("#nav").classList.remove("open");scrollTo(0,0);
+({careers:careers,jobs:jobs,assess:assess,dash:dash,skills:skills,admin:admin,compare:compare})[id]?.()}
+document.addEventListener("click",e=>{const t=e.target;let b;
+if(b=t.closest("[data-go]"))return go(b.dataset.go);
+if(b=t.closest("[data-cd]"))return detail(b.dataset.cd);
+if(b=t.closest("[data-sc]")){const s=ud("sc",[]),i=s.indexOf(b.dataset.sc);i<0?s.push(b.dataset.sc):s.splice(i,1);us("sc",s);b.textContent=i<0?"✔ Saved":"Save career";return}
+if(b=t.closest("[data-sj]")){const s=ud("sj",[]),i=s.indexOf(b.dataset.sj);i<0?s.push(b.dataset.sj):s.splice(i,1);us("sj",s);b.textContent=i<0?"✔ Saved":"Save job";return}
+if(b=t.closest("[data-ap]")){const j=JB[+b.dataset.ap];modal(`<h2>Apply: ${j[0]}</h2><p>This is a <b>sample job made for the demo</b>, so no application is sent. To apply for real vacancies use <a href="https://www.ncs.gov.in" target="_blank" rel="noopener">National Career Service</a>, <a href="https://internshala.com" target="_blank" rel="noopener">Internshala</a> or company career pages.</p>`)}});
+$("#ham").onclick=()=>$("#nav").classList.toggle("open");
+const modal=h=>{$("#mc").innerHTML=h;$("#modal").hidden=false};$("#mx").onclick=()=>$("#modal").hidden=true;
+
+/* auth (demo: password hashed, stored only in this browser) */
+async function hash(s){try{const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("cai:"+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}catch(e){return encodeURIComponent(s)}}
+const msg=(id,t,ok)=>{$(id).className="fb "+(ok?"ok":"er");$(id).textContent=t};
+$("#rgo").onclick=async()=>{const n=$("#rn").value.trim(),e=$("#re").value.trim().toLowerCase(),p=$("#rp").value;
+if(n.length<2)return msg("#rm","Enter your full name.");if(!/^\S+@\S+\.\S+$/.test(e))return msg("#rm","Enter a valid email address.");if(p.length<6)return msg("#rm","Password needs at least 6 characters.");if(p!==$("#rc").value)return msg("#rm","Passwords do not match.");if(!$("#rd").value)return msg("#rm","Choose your education level.");
+if(ld("acc:"+e,null))return msg("#rm","This email is already registered. Please login.");
+sv("acc:"+e,{name:n,email:e,h:await hash(p),edu:$("#rd").value,course:$("#rq").value.trim(),interests:$("#ri").value.trim()});sv("ul",[...ld("ul",[]),e]);msg("#rm","Account created! You can now login on the left.",1);$("#le").value=e};
+$("#lgo").onclick=async()=>{const e=$("#le").value.trim().toLowerCase(),a=ld("acc:"+e,null);if(!e||!$("#lp").value)return msg("#lm","Enter email and password.");
+if(!a)return msg("#lm","No account with this email. Create an account first.");if(a.h!==await hash($("#lp").value))return msg("#lm","Wrong password.");sv("cur",e);drawNav();go("dash")};
+$("#lshow").onchange=e=>$("#lp").type=e.target.checked?"text":"password";
+$("#lguest").onclick=()=>{sv("cur","guest");drawNav();go("dash")};
+$("#lforgot").onclick=()=>modal("<h2>Forgot password</h2><p>In the full version, Firebase Authentication would email a reset link. This demo stores accounts only in your browser, so please create a new account with a different email.</p>");
+document.addEventListener("click",e=>{if(e.target.id=="lo"){sv("cur",null);drawNav();go("home")}});
+
+/* careers */
+function careers(){const q=$("#cq").value.toLowerCase(),c=$("#cc").value,sc=ud("sc",[]);
+$("#cl").innerHTML=CAR.filter(x=>(!c||x[3]==c)&&(x[1]+x[6].join(" ")+x[4]).toLowerCase().includes(q)).map(x=>`<div class="card"><h3>${x[2]} ${x[1]}</h3><span class="tag">${x[3]}</span><p class="mu">${x[4]}</p><button class="btn" data-cd="${x[0]}">View details</button></div>`).join("")||"<p>No careers match your search. Try another word.</p>"}
+$("#cc").innerHTML+=[...new Set(CAR.map(c=>c[3]))].map(c=>`<option>${c}</option>`).join("");$("#cq").oninput=careers;$("#cc").onchange=careers;
+function detail(id){const c=cx(id),rm=ud("rm",{}),saved=ud("sc",[]).includes(id),rs=rmap(c);
+modal(`<h2>${c[2]} ${c[1]}</h2><p>${c[4]}</p><p><b>Education:</b> ${c[7]}</p><p><b>Key skills:</b> ${c[6].map(s=>`<span class="tag">${s}</span>`).join("")}</p>${future(c)}<h3>Learning roadmap</h3>`+rs.map((s,i)=>`<label style="display:flex;gap:8px;align-items:center;color:var(--tx);font-size:15px"><input type="checkbox" data-rm="${id}${i}" ${rm[id+i]?"checked":""} ${cur()?"":"disabled"}>${s}</label>`).join("")+`<p class="mu">${cur()?"Tick steps to track progress.":"Login to track progress."}</p><p><a href="${c[8]}" target="_blank" rel="noopener">Free learning resource</a></p><h3>Related sample jobs</h3><p>${JB.filter(j=>j&&j[3]==id).map(j=>j[0]+" ("+j[2]+")").join(", ")||"None"}</p>`+(cur()?`<button class="btn" data-sc="${id}">${saved?"✔ Saved":"Save career"}</button>`:""))}
+document.addEventListener("change",e=>{const k=e.target.dataset.rm;if(k){const r=ud("rm",{});r[k]=e.target.checked;us("rm",r)}});
+
+/* assessment + scoring */
+function assess(){const a=ud("ans",[]);$("#qs").innerHTML=QS.map((q,i)=>`<div style="margin-bottom:12px"><b>${i+1}. ${q[0]}</b>`+q[1].map((o,k)=>`<label><input type="radio" name="q${i}" value="${k}" ${a[i]===k?"checked":""}>${o[0]}</label>`).join("")+"</div>").join("")+`<button class="btn" id="sub">Submit assessment</button><p class="fb er" id="am" aria-live="polite"></p>`;
+$("#sub").onclick=()=>{const r=QS.map((q,i)=>{const c=$(`input[name=q${i}]:checked`);return c?+c.value:null});if(r.includes(null)){$("#am").textContent="Please answer question "+(r.indexOf(null)+1)+".";return}
+const s=score(r);us("ans",r);us("u",s.u);us("res",s.list);sv("ac",ld("ac",0)+1);analyse(()=>go("dash"))}}
+function score(ans){const u={};ans.forEach((a,i)=>{const t=QS[i][1][a][1];for(const k in t)u[k]=(u[k]||0)+t[k]});const nm=o=>Math.sqrt(TR.reduce((s,k)=>s+(o[k]||0)**2,0))||1;
+return{u,list:CAR.map(c=>({id:c[0],pct:Math.round(TR.reduce((s,k)=>s+(u[k]||0)*(c[5][k]||0),0)/(nm(u)*nm(c[5]))*100)})).sort((a,b)=>b.pct-a.pct)}}
+function rcard(r,u){const c=cx(r.id),sk=ud("skills",{}),need=c[6].filter(s=>(sk[s]||0)<60),t=TR.filter(k=>c[5][k]).sort((a,b)=>(u[b]||0)-(u[a]||0)).slice(0,2).map(k=>TN[k]);
+return`<div class="card"><h3>${c[2]} ${c[1]} <span class="pct">${r.pct}%</span></h3><div class="bar"><div style="width:${r.pct}%"></div></div><p>Why: your answers show strong interest in ${t.join(" and ")}, which this career needs.</p><p class="mu"><b>Skills to improve:</b> ${need.join(", ")||"none, great work!"}</p><button class="btn" data-cd="${c[0]}">View career details</button><button class="btn g" data-sc="${c[0]}">${ud("sc",[]).includes(c[0])?"✔ Saved":"Save career"}</button></div>`}
+
+/* dashboard */
+function dash(){const m=me(),res=ud("res",null),u=ud("u",{}),sj=ud("sj",[]),sc=ud("sc",[]);let h=`<h2>Welcome, ${esc(m.name)}! 👋</h2><p class="mu">${res?"Assessment completed.":"You have not taken the assessment yet."} Your data is saved in this browser.</p><button class="btn" data-go="assess">${res?"Retake assessment":"Start assessment"}</button><button class="btn g" data-go="skills">Skill analysis</button><button class="btn g" data-go="jobs">Explore jobs</button>`;
+if(res){const top=cx(res[0].id),rm=ud("rm",{}),rs=rmap(top),d=rs.filter((s,i)=>rm[top[0]+i]).length;
+h+=`<h3>Your top 3 careers</h3><div class="grid">${res.slice(0,3).map(r=>rcard(r,u)).join("")}</div><h3>Recommended jobs</h3><div class="grid">${rankedJobs().slice(0,3).map(jcard).join("")}</div><h3>Roadmap progress: ${top[1]}</h3><div class="bar"><div style="width:${d/rs.length*100}%"></div></div><p class="mu">${d} of ${rs.length} steps done. Open the career and tick steps.</p>`}
+h+=quest()+`<h3>Saved careers</h3><p>${sc.map(i=>`<button class="btn g" data-cd="${i}">${cx(i)[1]}</button>`).join("")||"<span class='mu'>None yet.</span>"}</p><h3>Saved jobs</h3><p>${sj.filter(i=>JB[+i]).map(i=>`<span class="tag">${JB[+i][0]}</span>`).join("")||"<span class='mu'>None yet.</span>"}</p>`;
+if(cur()!="guest")h+=`<h3>Edit profile</h3><div class="card"><label>Name</label><input id="pn" value="${esc(m.name)}"><label>Education</label><select id="pe">${["12th pass","Diploma","Graduate","Postgraduate"].map(x=>`<option ${x==m.edu?"selected":""}>${x}</option>`).join("")}</select><button class="btn" id="ps">Save profile</button><span class="fb" id="pm"></span></div>`;
+$("#dash").innerHTML=h;const b=$("#ps");if(b)b.onclick=()=>{const n=$("#pn").value.trim();if(n.length<2){$("#pm").textContent="Enter a valid name.";return}const a=ld("acc:"+cur(),{});a.name=n;a.edu=$("#pe").value;sv("acc:"+cur(),a);drawNav();$("#pm").className="fb ok";$("#pm").textContent="Saved!"}}
+
+/* skills */
+function skills(){const res=ud("res",null);$("#sc").innerHTML=CAR.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("");if(res)$("#sc").value=res[0].id;drawSk()}
+function drawSk(){const c=cx($("#sc").value),sk=ud("skills",{});$("#sk").innerHTML="<p class='mu'>Rate yourself from 0 to 100. The bars update instantly.</p>"+c[6].map(s=>{const v=sk[s]||0,st=v>=70?"Good":v>=40?"Improving":"Learning required";return`<div style="margin:12px 0"><b>${s}</b> <span class="mu" id="st${s.replace(/\W/g,"")}">${v}% · ${st}</span><input type="range" min="0" max="100" value="${v}" data-sk="${s}"><div class="bar"><div style="width:${v}%" id="b${s.replace(/\W/g,"")}"></div></div></div>`}).join("")+`<button class="btn" data-cd="${c[0]}">View learning roadmap</button>`}
+$("#sc").onchange=drawSk;
+document.addEventListener("input",e=>{const s=e.target.dataset.sk;if(!s)return;const k=ud("skills",{});k[s]=+e.target.value;us("skills",k);const v=k[s],i=s.replace(/\W/g,"");$("#b"+i).style.width=v+"%";$("#st"+i).textContent=v+"% · "+(v>=70?"Good":v>=40?"Improving":"Learning required")});
+
+/* jobs */
+function jscore(j){const c=cx(j[3]),sk=ud("skills",{}),res=ud("res",null),sm=c[6].slice(0,3).filter(s=>(sk[s]||0)>=50).length/3*50,cm=(res?(res.find(r=>r.id==j[3])||{pct:0}).pct:0)*.25,ed=["Graduate","Postgraduate","Diploma"].includes((me()||{}).edu)?15:8;return Math.round(sm+cm+ed+(j[4]=="Fresher"?10:4))}
+const rankedJobs=()=>JB.map((j,i)=>j&&{j,i,s:jscore(j)}).filter(Boolean).sort((a,b)=>b.s-a.s);
+const jcard=o=>{const j=o.j,c=cx(j[3]),sj=ud("sj",[]).includes(""+o.i);return`<div class="card"><h3>${j[0]}</h3><p class="mu">${j[1]} · ${j[2]} · ${j[5]} · ${j[4]} <span class="tag">Sample job</span></p><p>${c[6].slice(0,3).map(s=>`<span class="tag">${s}</span>`).join("")}</p>${cur()&&ud("res",null)?jm(o):""}<button class="btn" data-ap="${o.i}">Apply now</button>${cur()?`<button class="btn g" data-sj="${o.i}">${sj?"✔ Saved":"Save job"}</button>`:""}</div>`};
+function jobs(){const f=[$("#jl").value,$("#jc").value,$("#je").value,$("#jm").value],r=rankedJobs().filter(o=>(!f[0]||o.j[2]==f[0])&&(!f[1]||cx(o.j[3])[3]==f[1])&&(!f[2]||o.j[4]==f[2])&&(!f[3]||o.j[5]==f[3]));$("#jlist").innerHTML=r.map(jcard).join("")||"<p>No jobs match these filters. Try changing them.</p>"}
+$("#jl").innerHTML+=[...new Set(JB.map(j=>j[2]))].map(x=>`<option>${x}</option>`).join("");$("#jc").innerHTML+=[...new Set(CAR.map(c=>c[3]))].map(x=>`<option>${x}</option>`).join("");$$("#jobs select").forEach(s=>s.onchange=jobs);
+
+/* AIRA */
+let tk=0,muted=false,seq=0;
+function say(t,go,silent){const id=++tk;return new Promise(res=>{try{speechSynthesis.cancel()}catch(e){}$("#bub").innerHTML=esc(t)+(go?`<br><button class="btn" data-go="${go}">Open this page</button>`:"");$("#fig").classList.add("talking");
+const stop=()=>{if(id==tk)$("#fig").classList.remove("talking");res()};
+if(!muted&&!silent&&window.speechSynthesis){const u=new SpeechSynthesisUtterance(t);u.lang="en-IN";u.rate=.95;const v=speechSynthesis.getVoices().find(v=>/female|zira|samantha|heera|veena/i.test(v.name));if(v)u.voice=v;u.onend=u.onerror=stop;speechSynthesis.speak(u)}else setTimeout(stop,Math.min(7000,t.length*50))})}
+const SC=["Hello! Welcome to CareerAI, your personal career guidance platform. Let us discover your future together!","Choosing a career can be confusing. CareerAI matches your interests, skills and qualifications with ten career paths.","Take the assessment, see your match scores, close your skill gaps, and explore jobs ranked for you.","Ready? Create your account, or continue as a guest. You can also ask me anything with the Ask AIRA button!"];
+async function play(silent){const m=++seq;for(const s of SC){if(m!=seq)return;await say(s,null,silent);if(m!=seq)return}if(m==seq)say("Pick a feature below and I will explain it.",null,silent)}
+const FE=[["🎯","Career Assessment","Answer ten simple questions and I will discover careers that match your interests.","assess"],["🧠","AI Recommendations","I score every career against your answers and explain why each one fits you.","dash"],["💼","Job Recommendations","Explore sample jobs ranked by your skills, career match, education and experience.","jobs"],["📚","Skill Development","See your skill gaps with progress bars and follow a learning roadmap.","skills"]];
+$("#feat").innerHTML=FE.map((f,i)=>`<div class="card"><h3>${f[0]} ${f[1]}</h3><p class="mu">${f[2].slice(0,60)}…</p><button class="btn g" data-f="${i}">Explain with AIRA</button></div>`).join("");
+document.addEventListener("click",e=>{const b=e.target.closest("[data-f]");if(b){seq++;scrollTo(0,0);say(FE[+b.dataset.f][2],FE[+b.dataset.f][3])}});
+$("#talk").onclick=()=>{try{speechSynthesis.cancel()}catch(e){}play(false)};
+$("#skip").onclick=()=>{seq++;tk++;try{speechSynthesis.cancel()}catch(e){}$("#fig").classList.remove("talking");$("#bub").textContent="Intro skipped. Choose a feature below or ask me a question."};
+$("#mute").onclick=()=>{muted=!muted;$("#mute").textContent="Sound: "+(muted?"off":"on");if(muted)try{speechSynthesis.cancel()}catch(e){}};
+$("#fab").onclick=()=>{$("#chat").hidden=!$("#chat").hidden;if(!$("#cm").innerHTML){bot("Hi! Ask me about the assessment, careers, jobs, skills or how the AI works.");chips()}};
+function bot(t,g){$("#cm").innerHTML+=`<p>${esc(t)}${g?` <button class="btn g" style="padding:4px 10px" data-go="${g}">Open</button>`:""}</p>`;$("#cm").scrollTop=1e5}
+function extra(q){const h=(...w)=>w.some(x=>q.includes(x)),f=q.trim().split(/\W+/)[0],cr=CAR.find(c=>q.includes(c[1].toLowerCase()));
+if(["hi","hello","hey","namaste"].includes(f))return["Hello! I am AIRA. Ask me about careers, the assessment, jobs, skills or this project."];
+if(h("thank"))return["You are welcome! Anything else you would like to know?"];
+if(h("who are you","your name","aira"))return["I am AIRA, the AI Recommendation Assistant of CareerAI. I guide you through the website and answer questions about it."];
+if(cr)return[cr[1]+": "+cr[4]+" Key skills: "+cr[6].join(", ")+".","careers"];
+if(h("salary","pay","package"))return["Salary depends on role, city and skills. I do not show unverified figures. Check the National Career Service or job portals for current data.","jobs"];
+if(h("interview","resume","cv"))return["Resume analysis and interview preparation are future scope. For now, finish your roadmap and build a portfolio project.","careers"];
+if(h("password","forgot"))return["In the full version Firebase emails a reset link. In this demo, create a new account.","auth"];
+if(h("admin","manage"))return["The admin demo lets you add and delete careers and jobs, and view users and feedback.","admin"];
+if(h("limit","future","scope","weak","drawback"))return["Limits: results are guidance, jobs are samples and accounts are stored only in this browser. Future scope: Firebase login, a trained ML model, live job feeds and resume analysis.","about"];
+if(h("technolog","html","javascript","firebase","built","language"))return["CareerAI is built with HTML, CSS and JavaScript. Firebase Authentication and Firestore are the planned backend.","about"];
+if(h("save"))return["Open a career or job and click Save. Saved items appear on your dashboard after login.","dash"];
+if(h("weight","cosine","score","formula","percent","match"))return["Career match: answers add weights to 8 traits, then cosine similarity compares you with each career. Job match: skills 50%, career 25%, education 15%, experience 10%.","about"];
+if(h("machine learning","ml model","trained","dataset"))return["This version is a rule-based recommendation engine. A trained ML model with a real dataset is future scope.","about"];
+if(h("contact","feedback","help","faq"))return["Open About for the Help and FAQ and the feedback form.","about"];return null}
+function chips(){$("#cm").innerHTML+=`<p>${["Which career is good for me?","How does the AI work?","Show me jobs","What are the limitations?"].map(q=>`<button class="btn g" style="padding:4px 10px" data-q="${q}">${q}</button>`).join("")}</p>`}
+function reply(q){q=q.toLowerCase();const x=extra(q);if(x)return x;const h=(...w)=>w.some(x=>q.includes(x)),res=ud("res",null);
+if(h("which","suit","best","recommend","career for"))return res&&cur()?["Your top match is "+cx(res[0].id)[1]+" at "+res[0].pct+"%. Open your dashboard for details.","dash"]:["Take the 10-question assessment and I will calculate your best matches.","assess"];
+if(h("assess","quiz","test"))return["The assessment has 10 multiple-choice questions. Answers are scored against 10 career profiles.","assess"];
+if(h("job","vacan","apply"))return["Jobs are ranked by skills 50%, career match 25%, education 15% and experience 10%. They are demo samples.","jobs"];
+if(h("skill","gap","improve","roadmap","learn"))return["Rate your skills to see progress bars and learning gaps. Open a career for its roadmap.","skills"];
+if(h("login","account","register","sign"))return["Create an account or continue as a guest.","auth"];
+if(h("ai","algorithm","how","work","accuracy"))return["It is a rule-based engine: answers add trait weights, then cosine similarity compares you with each career.","about"];
+if(h("career"))return["We cover 10 careers, from AI/ML Engineer to Database Administrator.","careers"];return["I am not sure about that yet, but I can help with the assessment, careers, jobs, skills, the AI and the project. Try one of these:",null,1]}
+function ask(){const q=$("#ci").value.trim();if(!q)return;$("#cm").innerHTML+=`<p class="u">${esc(q)}</p>`;$("#ci").value="";const r=reply(q);bot(r[0],r[1]);if(r[2])chips();say(r[0],r[1])}
+$("#cs").onclick=ask;$("#ci").onkeydown=e=>{if(e.key=="Enter")ask()};
+
+document.addEventListener("click",e=>{const b=e.target.closest("[data-q]");if(b){$("#ci").value=b.dataset.q;ask()}});
+
+/* admin demo + feedback */
+const CATV={Technology:{code:2,infra:1},Data:{data:3,math:1},Security:{security:3,infra:1},Design:{design:3},Business:{business:3,people:1}},CATS=Object.keys(CATV),opt=a=>a.map(x=>`<option>${x}</option>`).join("");
+const saveJ=()=>sv("xj",JB.slice(NB));
+function admin(m){const us2=ld("ul",[]),fb=ld("fbk",[]);
+$("#admin").innerHTML=`<h2>Admin dashboard <span class="tag">Demo</span></h2><p class="mu">Demonstration only. A real admin panel needs server-side login and permissions (for example Firebase security rules). Built-in items cannot be deleted; items you add can.</p>
+<div class="grid">${[["Registered users",us2.length],["Careers",CAR.length],["Job listings",JB.filter(Boolean).length],["Assessments completed",ld("ac",0)]].map(x=>`<div class="card"><span class="mu">${x[0]}</span><h2>${x[1]}</h2></div>`).join("")}</div>
+<p class="fb ok" id="adm" aria-live="polite">${m||""}</p>
+<div class="grid"><div class="card"><h3>Add a career</h3><label>Name</label><input id="adn"><label>Category</label><select id="adc">${opt(CATS)}</select><label>Description</label><input id="add"><label>Skills (comma separated)</label><input id="ads" placeholder="Python, SQL, Excel"><button class="btn" id="addc">Add career</button></div>
+<div class="card"><h3>Add a job</h3><label>Title</label><input id="ajt"><label>Company</label><input id="ajc"><label>Location</label><input id="ajl"><label>Career</label><select id="ajr">${CAR.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("")}</select><label>Experience</label><select id="aje"><option>Fresher</option><option>1-2 years</option></select><label>Work type</label><select id="ajm"><option>On-site</option><option>Remote</option></select><button class="btn" id="addj">Add job</button></div></div>
+<h3>Manage careers</h3><div class="card">${CAR.map(c=>`<p>${c[2]} ${esc(c[1])} <span class="tag">${c[3]}</span> ${String(c[0])[0]=="x"?`<button class="btn g" data-dc="${c[0]}">Delete</button>`:"<span class='mu'>built-in</span>"}</p>`).join("")}</div>
+<h3>Manage jobs</h3><div class="card">${JB.map((j,i)=>j?`<p>${esc(j[0])} · ${esc(j[1])} · ${esc(j[2])} ${i>=NB?`<button class="btn g" data-dj="${i}">Delete</button>`:"<span class='mu'>built-in sample</span>"}</p>`:"").join("")}</div>
+<h3>Registered users</h3><div class="card">${us2.map(e=>{const a=ld("acc:"+e,{});return`<p>${esc(a.name||e)} · ${esc(e)} · ${esc(a.edu||"")}</p>`}).join("")||"<span class='mu'>No users yet.</span>"}</div>
+<h3>Feedback received</h3><div class="card">${fb.map(f=>`<p><b>${esc(f.n||"Anonymous")}:</b> ${esc(f.m)}</p>`).join("")||"<span class='mu'>No feedback yet.</span>"}</div>
+<button class="btn g" id="adr">Reset my added items</button>`;
+$("#addc").onclick=()=>{const n=$("#adn").value.trim(),s=$("#ads").value.split(",").map(x=>x.trim()).filter(Boolean);if(n.length<3||s.length<2){$("#adm").className="fb er";$("#adm").textContent="Enter a name (3+ letters) and at least 2 skills.";return}
+const c=["x"+Date.now(),n,"⭐",$("#adc").value,$("#add").value.trim()||"Career added by admin.",CATV[$("#adc").value],s,"Any graduate","https://www.ncs.gov.in"];CAR.push(c);sv("xc",[...ld("xc",[]),c]);admin("Career added. It now takes part in recommendations.")};
+$("#addj").onclick=()=>{const t=$("#ajt").value.trim(),c=$("#ajc").value.trim(),l=$("#ajl").value.trim();if(!t||!c||!l){$("#adm").className="fb er";$("#adm").textContent="Fill in title, company and location.";return}JB.push([t,c,l,$("#ajr").value,$("#aje").value,$("#ajm").value]);saveJ();admin("Job added. It appears in Explore Jobs.")};
+$("#adr").onclick=()=>{CAR.length=NC;JB.length=NB;sv("xc",[]);sv("xj",[]);admin("Your added items were removed.")}}
+document.addEventListener("click",e=>{let b=e.target.closest("[data-dc]"),d=e.target.closest("[data-dj]");
+if(b){const c=cx(b.dataset.dc);modal(`<h2>Delete ${esc(c[1])}?</h2><p>Jobs linked to it will also be removed.</p><button class="btn" id="yes">Yes, delete</button>`);$("#yes").onclick=()=>{const id=c[0];CAR.splice(CAR.indexOf(c),1);sv("xc",ld("xc",[]).filter(x=>x[0]!=id));JB.forEach((j,k)=>{if(j&&j[3]==id)JB[k]=null});saveJ();$("#modal").hidden=true;admin("Career deleted.")}}
+if(d){const j=JB[+d.dataset.dj];modal(`<h2>Delete job: ${esc(j[0])}?</h2><button class="btn" id="yes">Yes, delete</button>`);$("#yes").onclick=()=>{JB[+d.dataset.dj]=null;saveJ();$("#modal").hidden=true;admin("Job deleted.")}}});
+$("#fbs").onclick=()=>{const m=$("#fm").value.trim(),o=$("#fbm");if(m.length<10){o.className="fb er";o.textContent="Please write at least 10 characters.";return}sv("fbk",[...ld("fbk",[]),{n:$("#fn").value.trim(),m}]);o.className="fb ok";o.textContent="Thank you! Feedback saved in this browser (demo).";$("#fm").value=""};
+
+const PJ={Technology:"a small working app",Data:"an analysis of a public dataset",Security:"a beginner security lab write-up",Design:"a portfolio case study",Business:"a requirements document"};
+function future(c){const S=[["📍 Today","Check your skills in Skill Analysis"],["📚 Learning","Learn "+c[6].slice(0,2).join(" and ")],["🛠️ Projects","Build "+(PJ[c[3]]||"a project")],["💼 Internship","Apply for "+c[1]+" internships"],["🚀 Career","Start as an entry-level "+c[1]]];
+return`<h3>My future self</h3><div style="display:flex;flex-wrap:wrap;gap:6px;align-items:stretch">${S.map((s,i)=>`<div class="card" style="flex:1 1 110px;padding:8px;font-size:13px"><b>${s[0]}</b><br>${s[1]}</div>`+(i<4?"<span style='align-self:center'>→</span>":"")).join("")}</div>`}
+function quest(){const rm=ud("rm",{}),sk=ud("skills",{}),steps=Object.values(rm).filter(Boolean).length,rated=Object.values(sk).filter(v=>v>=50).length,done=ud("res",null)?1:0,sc=ud("sc",[]).length,xp=done*50+steps*30+rated*20+sc*5,B=[["🧭","Explorer",done],["🛠️","Skill Builder",rated>=3],["🏃","Roadmap Runner",steps>=3],["⭐","Collector",sc>=1]];
+return`<h3>Career Quest</h3><div class="card"><b>Level ${Math.floor(xp/100)+1}</b> · ${xp} XP<div class="bar" style="margin:8px 0"><div style="width:${xp%100}%"></div></div><p>${B.map(b=>`<span class="tag" style="${b[2]?"":"opacity:.4"}">${b[0]} ${b[1]}</span>`).join("")}</p><p class="mu">Earn XP: assessment 50, roadmap step 30, skill at 50%+ 20. XP is motivation, not a measure of employability.</p></div>`}
+function jm(o){const j=o.j,c=cx(j[3]),sk=ud("skills",{}),ss=c[6].slice(0,3),have=ss.filter(s=>(sk[s]||0)>=50),need=ss.filter(s=>(sk[s]||0)<50),ep=["Graduate","Postgraduate","Diploma"].includes((me()||{}).edu)?100:55,xp=j[4]=="Fresher"?100:40;
+return`<p><b>Match ${o.s}%</b></p><p class="mu">Skills ${Math.round(have.length/3*100)}% · Education ${ep}% · Experience ${xp}%<br>${have.length?"Why: you rated "+have.join(", ")+" at 50%+.":"Rate your skills in Skill Analysis to raise this match."}${need.length?" Improve: "+need.join(", ")+".":""}</p>`}
+function analyse(cb){modal(`<h2>AIRA is analysing…</h2><p style="font-size:36px" id="an">🧠</p><p class="mu" id="at">Reading your answers</p>`);[["🔍","Comparing with all career profiles"],["📊","Calculating match scores"],["🎯","Preparing your results"]].forEach((s,i)=>setTimeout(()=>{if($("#an")){$("#an").textContent=s[0];$("#at").textContent=s[1]}},500*(i+1)));setTimeout(()=>{$("#modal").hidden=true;cb()},2100)}
+function compare(){const ca=$("#ca"),cb=$("#cb"),va=ca.value,vb=cb.value,o=CAR.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("");ca.innerHTML=o;cb.innerHTML=o;ca.value=va;cb.value=vb;if(!ca.value)ca.selectedIndex=0;if(!cb.value)cb.selectedIndex=Math.min(1,CAR.length-1);
+const A=cx(ca.value),B=cx(cb.value),R=[["Main focus",c=>c[4]],["Category",c=>c[3]],["Key skills",c=>c[6].join(", ")],["Education",c=>c[7]],["Strongest traits",c=>TR.filter(k=>c[5][k]).sort((a,b)=>c[5][b]-c[5][a]).slice(0,3).map(k=>TN[k]).join(", ")],["Example project",c=>PJ[c[3]]||"A small project"],["Sample jobs",c=>JB.filter(j=>j&&j[3]==c[0]).map(j=>j[0]).join(", ")||"None"],["Your match",c=>{const r=(ud("res",null)||[]).find(r=>r.id==c[0]);return r?r.pct+"%":"Take the assessment"}]],sh=A[6].filter(s=>B[6].includes(s));
+$("#ct").innerHTML=`<table><tr><th></th><th>${A[2]} ${esc(A[1])}</th><th>${B[2]} ${esc(B[1])}</th></tr>${R.map(r=>`<tr><th>${r[0]}</th><td>${esc(r[1](A))}</td><td>${esc(r[1](B))}</td></tr>`).join("")}</table><p>Skills in common: ${sh.join(", ")||"none"}</p><p class="mu">Salary and job availability vary by place, experience and employer, so they are not shown as guarantees.</p>`}
+$("#ca").onchange=compare;$("#cb").onchange=compare;
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(SR)$("#mic").hidden=false;
+$("#mic").onclick=()=>{try{const r=new SR();r.lang="en-IN";r.onresult=e=>{$("#ci").value=e.results[0][0].transcript;ask()};r.onerror=()=>bot("Microphone is not available. Please type your question.");r.start()}catch(e){bot("Voice is not supported here. Please type your question.")}};
+const DS=[["home","Welcome to CareerAI! Many students are unsure which career to choose. This project gives personal career, skill and job guidance in one place. Let me show you how it works."],["auth","Step two, registration. You can create an account on this page. For this demonstration I will continue as a guest so we can move quickly."],["assess","Step three, the career assessment. I have filled in sample answers for a student who likes programming and mathematics."],["dash","Step four, the recommendation engine. Each answer adds trait weights, and cosine similarity compares the student with every career. These are the calculated matches."],["jobs","Step five, smart job matching. Jobs are scored using skills, career match, education and experience. These are demo sample jobs."],["skills","Step six, skill gap analysis. Rate your skills and the progress bars show what to learn next."],["about","Step seven, conclusion. CareerAI uses HTML, CSS and JavaScript with a rule-based engine. Its limits are sample jobs and browser-only accounts. Firebase and a trained ML model are future scope. Thank you!"]];
+let prevCur=null;const AS=[0,0,0,0,0,0,0,0,1,0];
+function demo(n){let b=$("#tb");if(!b){b=document.createElement("div");b.id="tb";b.className="card";b.style.cssText="position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));z-index:25;border:2px solid var(--pu)";document.body.appendChild(b);prevCur=cur()}
+if(n<0||n>=DS.length){b.remove();seq++;tk++;try{speechSynthesis.cancel()}catch(e){}sv("cur",prevCur);drawNav();go("home");return}
+seq++;if(n>=2){sv("cur","guest");drawNav()}if(n==3){const s=score(AS);us("ans",AS);us("u",s.u);us("res",s.list)}
+go(DS[n][0]);if(n==2)AS.forEach((a,i)=>{document.querySelectorAll("input[name=q"+i+"]")[a].checked=true});
+say(DS[n][1]);b.innerHTML=`<b>Step ${n+1} of ${DS.length}</b><p style="margin:4px 0">${esc(DS[n][1])}</p><button class="btn g" id="db">Back</button><button class="btn" id="dn">${n==DS.length-1?"Finish":"Next"}</button><button class="btn g" id="dx">Exit</button>`;
+$("#db").onclick=()=>demo(n-1<0?0:n-1);$("#dn").onclick=()=>demo(n+1);$("#dx").onclick=()=>demo(-1)}
+$("#demo").onclick=()=>demo(0);
+
+drawNav();go("home");careers();setTimeout(()=>play(true),600);
+</script></body></html>
